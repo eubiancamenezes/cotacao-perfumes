@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Cotação Perfumes MOOD</title>
+    <style>
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f44 50%, #0d1f30 100%);
+            padding: 16px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ===== CARD PRINCIPAL ===== */
+        .app-card {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 48px;
+            padding: 28px 22px 32px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeIn 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, #1a5a7a, #4a9ac7, #1a5a7a);
+            border-radius: 4px;
+        }
+
+        .header h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0b2b44 0%, #1a5a7a 50%, #2a7a9a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subhead {
+            color: #4a7a9a;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(42, 107, 150, 0.08);
+            padding: 4px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            -webkit-text-fill-color: #4a7a9a;
+        }
+
+        /* ===== VALORES FIXOS ===== */
+        .fixed-values {
+            background: linear-gradient(135deg, #eef5fa 0%, #dce8f2 100%);
+            border-radius: 28px;
+            padding: 16px 18px;
+            margin-bottom: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid rgba(42, 107, 150, 0.12);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .fixed-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #3a5a7a;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .fixed-item span:last-child {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #003153;
+            background: white;
+            padding: 2px 16px;
+            border-radius: 30px;
+            margin-top: 4px;
+            border: 1px solid rgba(42, 107, 150, 0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===== CAMPOS EDITÁVEIS ===== */
+        .field-group {
+            background: linear-gradient(135deg, #f2f8fd 0%, #e6f0f8 100%);
+            border-radius: 28px;
+            padding: 20px 18px 12px 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(42, 107, 150, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .field-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        .field-row label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a3a52;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .field-row label small {
+            font-weight: 400;
+            color: #5a7a9a;
+            font-size: 0.65rem;
+            background: rgba(42, 107, 150, 0.08);
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        .field-row input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(42, 107, 150, 0.12);
+            border-radius: 30px;
+            font-size: 1rem;
+            background: white;
+            color: #00243d;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
+        .field-row input:focus {
+            border-color: #2a7a9a;
+            box-shadow: 0 0 0 4px rgba(42, 107, 150, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .field-row input::placeholder {
+            color: #aabccd;
+            font-weight: 400;
+        }
+
+        .row-duo {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row-duo .field-row {
+            flex: 1;
+        }
+
+        /* ===== BOTÃO ===== */
+        .action-btn {
+            background: linear-gradient(135deg, #1a4a6a 0%, #2a7a9a 50%, #1a5a7a 100%);
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 18px 20px;
+            border-radius: 60px;
+            width: 100%;
+            margin: 8px 0 18px 0;
+            box-shadow: 0 8px 28px rgba(42, 107, 150, 0.35);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            letter-spacing: 0.8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .action-btn:active {
+            transform: scale(0.97) translateY(2px);
+            box-shadow: 0 4px 16px rgba(42, 107, 150, 0.25);
+        }
+
+        .action-btn:active::before {
+            left: 100%;
+            transition: left 0.3s ease;
+        }
+
+        /* ===== FEEDBACK ===== */
+        .feedback {
+            text-align: center;
+            color: #1a7a4a;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: -10px 0 14px 0;
+            min-height: 28px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: translateY(-6px);
+        }
+
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feedback.error {
+            color: #c0392b;
+        }
+
+        /* ===== RESULTADOS ===== */
+        .results-area {
+            background: linear-gradient(135deg, #e6f0f8 0%, #d8e6f0 100%);
+            border-radius: 28px;
+            padding: 20px 18px;
+            margin: 16px 0 20px 0;
+            border: 1px solid rgba(42, 107, 150, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(42, 107, 150, 0.12);
+            font-size: 0.95rem;
+            color: #002d47;
+            transition: all 0.2s ease;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item .label {
+            font-weight: 500;
+            color: #2a5a7a;
+        }
+
+        .result-item .value {
+            font-weight: 700;
+            color: #003f62;
+            font-size: 1.05rem;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2px 14px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .result-item .value.highlight {
+            color: #1a7a4a;
+            background: rgba(26, 122, 74, 0.08);
+        }
+
+        /* ===== HISTÓRICO ===== */
+        .history-area {
+            background: linear-gradient(135deg, #eaf2f8 0%, #dce8f2 100%);
+            border-radius: 28px;
+            padding: 14px 16px 10px 16px;
+            margin: 18px 0 8px 0;
+            border: 1px solid rgba(42, 107, 150, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-header h3 {
+            font-size: 0.9rem;
+            color: #1a4a6a;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .clear-btn {
+            background: rgba(90, 130, 170, 0.12);
+            border: 1px solid rgba(90, 130, 170, 0.15);
+            color: #3a6a8a;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .clear-btn:active {
+            transform: scale(0.95);
+            background: rgba(90, 130, 170, 0.2);
+        }
+
+        .history-list {
+            max-height: 140px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            padding-right: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(42, 107, 150, 0.25);
+            border-radius: 10px;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 30px;
+            padding: 8px 16px;
+            margin-bottom: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #2a7a9a;
+            color: #003153;
+            font-weight: 500;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .history-item .h-diff {
+            font-weight: 700;
+            color: #2a7a9a;
+        }
+
+        .empty-history {
+            color: #5a7a9a;
+            font-style: italic;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RODAPÉ ===== */
+        .footnote {
+            font-size: 0.65rem;
+            color: #5a7a9a;
+            text-align: center;
+            margin-top: 14px;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 460px) {
+            .app-card {
+                padding: 20px 14px 24px;
+                border-radius: 32px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .header .subhead {
+                font-size: 0.75rem;
+                letter-spacing: 1.5px;
+            }
+
+            .fixed-item {
+                font-size: 0.6rem;
+            }
+
+            .fixed-item span:last-child {
+                font-size: 0.9rem;
+                padding: 2px 12px;
+            }
+
+            .row-duo {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .result-item {
+                font-size: 0.85rem;
+                padding: 8px 0;
+            }
+
+            .result-item .value {
+                font-size: 0.95rem;
+                padding: 2px 10px;
+            }
+
+            .action-btn {
+                font-size: 1rem;
+                padding: 16px 16px;
+                letter-spacing: 0.5px;
+            }
+
+            .field-row input {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+
+            .field-group {
+                padding: 16px 14px 10px 14px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .app-card {
+                padding: 32px 30px 36px;
+            }
+        }
+
+        /* ===== PREVENÇÃO DE ZOOM EM INPUTS ===== */
+        input[type="number"] {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== APP ===== -->
+    <div class="app-card">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>✨ Cotação Perfumes</h1>
+            <span class="subhead">preço de venda ideal</span>
+        </div>
+
+        <!-- VALORES FIXOS -->
+        <div class="fixed-values">
+            <div class="fixed-item">
+                <span>Fornecedor</span>
+                <span>R$ 50,00</span>
+            </div>
+            <div class="fixed-item">
+                <span>Frete</span>
+                <span>R$ 20,00</span>
+            </div>
+            <div class="fixed-item">
+                <span>Base</span>
+                <span id="baseDisplay">R$ 70,00</span>
+            </div>
+        </div>
+
+        <!-- CAMPOS EDITÁVEIS -->
+        <div class="field-group">
+            <div class="field-row">
+                <label>
+                    Preço no atacado
+                    <small>reposição</small>
+                </label>
+                <input type="number" id="atacadoInput" value="0" step="0.01" min="0" inputmode="decimal" placeholder="0,00">
+            </div>
+
+            <div class="row-duo">
+                <div class="field-row">
+                    <label>Lucro mínimo</label>
+                    <input type="number" id="lucroMinInput" value="70" step="1" min="0" inputmode="numeric">
+                </div>
+                <div class="field-row">
+                    <label>Lucro máximo</label>
+                    <input type="number" id="lucroMaxInput" value="150" step="1" min="0" inputmode="numeric">
+                </div>
+            </div>
+
+            <div class="row-duo">
+                <div class="field-row">
+                    <label>Desconto 1</label>
+                    <input type="number" id="desc1Input" value="5" step="0.5" min="0" max="100" inputmode="decimal">
+                </div>
+                <div class="field-row">
+                    <label>Desconto 2</label>
+                    <input type="number" id="desc2Input" value="10" step="0.5" min="0" max="100" inputmode="decimal">
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÃO CALCULAR -->
+        <button class="action-btn" id="calcularBtn">📊 Calcular e comparar</button>
+
+        <!-- FEEDBACK -->
+        <div class="feedback" id="feedback">✓ Cálculo realizado com sucesso!</div>
+
+        <!-- RESULTADOS -->
+        <div class="results-area">
+            <div class="result-item">
+                <span class="label">💎 Lucro mínimo</span>
+                <span class="value" id="resMin">R$ 140,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">⭐ Lucro máximo</span>
+                <span class="value highlight" id="resMax">R$ 220,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">🎯 Desconto 1 (5%)</span>
+                <span class="value" id="resDesc1">R$ 209,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">🎯 Desconto 2 (10%)</span>
+                <span class="value" id="resDesc2">R$ 198,00</span>
+            </div>
+        </div>
+
+        <!-- HISTÓRICO -->
+        <div class="history-area">
+            <div class="history-header">
+                <h3>📋 Histórico</h3>
+                <button class="clear-btn" id="clearHistoryBtn">Limpar</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">Nenhum cálculo salvo</div>
+            </div>
+        </div>
+
+        <div class="footnote">* Descontos aplicados sobre o preço com lucro máximo</div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== ELEMENTOS DOM =====
+            const atacadoInput = document.getElementById('atacadoInput');
+            const lucroMinInput = document.getElementById('lucroMinInput');
+            const lucroMaxInput = document.getElementById('lucroMaxInput');
+            const desc1Input = document.getElementById('desc1Input');
+            const desc2Input = document.getElementById('desc2Input');
+            const calcularBtn = document.getElementById('calcularBtn');
+            const resMin = document.getElementById('resMin');
+            const resMax = document.getElementById('resMax');
+            const resDesc1 = document.getElementById('resDesc1');
+            const resDesc2 = document.getElementById('resDesc2');
+            const historyList = document.getElementById('historyList');
+            const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+            const baseDisplay = document.getElementById('baseDisplay');
+            const feedback = document.getElementById('feedback');
+
+            // ===== CONSTANTES =====
+            const BASE = 70;
+            baseDisplay.textContent = `R$ ${BASE.toFixed(2)}`;
+
+            // ===== HISTÓRICO =====
+            let historyData = [];
+
+            function loadHistory() {
+                try {
+                    const stored = localStorage.getItem('perfumeHistoryMOOD');
+                    if (stored) {
+                        historyData = JSON.parse(stored);
+                        if (!Array.isArray(historyData)) historyData = [];
+                    } else {
+                        historyData = [];
+                    }
+                } catch {
+                    historyData = [];
+                }
+                renderHistory();
+            }
+
+            function saveHistory() {
+                try {
+                    localStorage.setItem('perfumeHistoryMOOD', JSON.stringify(historyData));
+                } catch (e) {
+                    // Fallback silencioso
+                }
+            }
+
+            function renderHistory() {
+                if (!historyList) return;
+                if (historyData.length === 0) {
+                    historyList.innerHTML = `<div class="empty-history">Nenhum cálculo salvo</div>`;
+                    return;
+                }
+                let html = '';
+                const display = [...historyData].reverse().slice(0, 10);
+                for (const item of display) {
+                    html += `
+                        <div class="history-item">
+                            <span>Atacado: R$ ${item.atacado.toFixed(2)}</span>
+                            <span class="h-diff">Lucro: ${item.lucroMin} / ${item.lucroMax}</span>
+                        </div>
+                    `;
+                }
+                historyList.innerHTML = html;
+            }
+
+            // ===== FEEDBACK =====
+            function showFeedback(message, isError = false) {
+                feedback.textContent = message;
+                feedback.classList.remove('error');
+                if (isError) {
+                    feedback.classList.add('error');
+                }
+                feedback.classList.add('show');
+                clearTimeout(feedback._timeout);
+                feedback._timeout = setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2500);
+            }
+
+            // ===== FUNÇÃO PRINCIPAL DE CÁLCULO =====
+            function calcular() {
+                try {
+                    // Ler valores
+                    const atacado = parseFloat(atacadoInput.value) || 0;
+                    const lucroMin = parseFloat(lucroMinInput.value) || 0;
+                    const lucroMax = parseFloat(lucroMaxInput.value) || 0;
+                    const desc1 = parseFloat(desc1Input.value) || 0;
+                    const desc2 = parseFloat(desc2Input.value) || 0;
+
+                    // Validações
+                    if (atacado < 0) {
+                        showFeedback('⚠️ Preço no atacado não pode ser negativo', true);
+                        return;
+                    }
+                    if (lucroMin < 0) {
+                        showFeedback('⚠️ Lucro mínimo não pode ser negativo', true);
+                        return;
+                    }
+                    if (lucroMax < 0) {
+                        showFeedback('⚠️ Lucro máximo não pode ser negativo', true);
+                        return;
+                    }
+                    if (lucroMin > lucroMax) {
+                        showFeedback('⚠️ Lucro mínimo não pode ser maior que o máximo', true);
+                        return;
+                    }
+                    if (desc1 < 0 || desc1 > 100) {
+                        showFeedback('⚠️ Desconto 1 deve estar entre 0% e 100%', true);
+                        return;
+                    }
+                    if (desc2 < 0 || desc2 > 100) {
+                        showFeedback('⚠️ Desconto 2 deve estar entre 0% e 100%', true);
+                        return;
+                    }
+
+                    // Cálculos
+                    const precoMin = BASE + atacado + lucroMin;
+                    const precoMax = BASE + atacado + lucroMax;
+                    const precoDesc1 = precoMax * (1 - desc1 / 100);
+                    const precoDesc2 = precoMax * (1 - desc2 / 100);
+
+                    // Atualizar resultados com animação
+                    const resultados = [
+                        { el: resMin, valor: precoMin },
+                        { el: resMax, valor: precoMax },
+                        { el: resDesc1, valor: precoDesc1 },
+                        { el: resDesc2, valor: precoDesc2 }
+                    ];
+
+                    resultados.forEach(({ el, valor }) => {
+                        el.style.transition = 'all 0.25s ease';
+                        el.style.transform = 'scale(1.08)';
+                        el.textContent = `R$ ${valor.toFixed(2)}`;
+                        setTimeout(() => {
+                            el.style.transform = 'scale(1)';
+                        }, 200);
+                    });
+
+                    // Salvar histórico
+                    historyData.push({
+                        atacado,
+                        lucroMin,
+                        lucroMax,
+                        desc1,
+                        desc2,
+                        precoMin,
+                        precoMax,
+                        precoDesc1,
+                        precoDesc2,
+                        timestamp: Date.now()
+                    });
+                    saveHistory();
+                    renderHistory();
+
+                    showFeedback('✅ Cálculo realizado com sucesso!');
+                } catch (error) {
+                    console.error('Erro:', error);
+                    showFeedback('⚠️ Erro ao calcular. Verifique os valores.', true);
+                }
+            }
+
+            // ===== LIMPAR HISTÓRICO =====
+            function clearHistory() {
+                if (historyData.length === 0) {
+                    showFeedback('ℹ️ Histórico já está vazio');
+                    return;
+                }
+                if (confirm('Tem certeza que deseja limpar todo o histórico?')) {
+                    historyData = [];
+                    saveHistory();
+                    renderHistory();
+                    showFeedback('✅ Histórico limpo com sucesso!');
+                }
+            }
+
+            // ===== EVENTOS =====
+            // Botão calcular (clique e toque)
+            calcularBtn.addEventListener('click', calcular);
+            calcularBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                calcular();
+            }, { passive: false });
+
+            // Botão limpar histórico (clique e toque)
+            clearHistoryBtn.addEventListener('click', clearHistory);
+            clearHistoryBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                clearHistory();
+            }, { passive: false });
+
+            // Tecla Enter nos inputs
+            const inputs = [atacadoInput, lucroMinInput, lucroMaxInput, desc1Input, desc2Input];
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        calcular();
+                        if (document.activeElement) {
+                            document.activeElement.blur();
+                        }
+                    }
+                });
+                input.addEventListener('blur', function() {
+                    if (this.value === '' || this.value === '-') {
+                        this.value = '0';
+                    }
+                });
+            });
+
+            // ===== INICIALIZAÇÃO =====
+            loadHistory();
+
+            // Restaurar último cálculo ou fazer cálculo inicial
+            if (historyData.length > 0) {
+                const last = historyData[historyData.length - 1];
+                atacadoInput.value = last.atacado || 0;
+                lucroMinInput.value = last.lucroMin || 70;
+                lucroMaxInput.value = last.lucroMax || 150;
+                desc1Input.value = last.desc1 || 5;
+                desc2Input.value = last.desc2 || 10;
+
+                resMin.textContent = `R$ ${(last.precoMin || 140).toFixed(2)}`;
+                resMax.textContent = `R$ ${(last.precoMax || 220).toFixed(2)}`;
+                resDesc1.textContent = `R$ ${(last.precoDesc1 || 209).toFixed(2)}`;
+                resDesc2.textContent = `R$ ${(last.precoDesc2 || 198).toFixed(2)}`;
+            } else {
+                calcular();
+            }
+
+            console.log('✅ Cotação Perfumes MOOD carregado com sucesso!');
+        })();
+    </script>
+</body>
+</html>

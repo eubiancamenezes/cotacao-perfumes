@@ -25,15 +25,12 @@
         .app-card {
             max-width: 480px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 48px;
             padding: 28px 24px 32px;
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
             animation: fadeIn 0.6s ease-out;
         }
 
@@ -48,18 +45,6 @@
             }
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 24px;
@@ -85,7 +70,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
 
@@ -93,7 +77,6 @@
             color: #4a7a9a;
             font-size: 0.85rem;
             font-weight: 500;
-            letter-spacing: 1px;
             text-transform: uppercase;
             background: rgba(42, 107, 150, 0.1);
             padding: 4px 16px;
@@ -102,7 +85,6 @@
             -webkit-text-fill-color: #4a7a9a;
         }
 
-        /* Fixed Values */
         .fixed-values {
             background: linear-gradient(135deg, #f0f7fc 0%, #e3eef7 100%);
             border-radius: 28px;
@@ -113,8 +95,6 @@
             justify-content: space-between;
             align-items: center;
             border: 1px solid rgba(42, 107, 150, 0.15);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            animation: slideUp 0.5s ease-out 0.1s both;
         }
 
         .fixed-item {
@@ -136,18 +116,14 @@
             border-radius: 30px;
             margin-top: 4px;
             border: 1px solid rgba(42, 107, 150, 0.2);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
-        /* Field Group */
         .field-group {
             background: linear-gradient(135deg, #f4f9fe 0%, #e8f2f9 100%);
             border-radius: 28px;
             padding: 20px 18px 12px 18px;
             margin-bottom: 20px;
             border: 1px solid rgba(42, 107, 150, 0.12);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            animation: slideUp 0.5s ease-out 0.2s both;
         }
 
         .field-row {
@@ -188,17 +164,12 @@
             outline: none;
             -webkit-appearance: none;
             appearance: none;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
         }
 
         .field-row input:focus {
             border-color: #2a6b96;
             box-shadow: 0 0 0 4px rgba(42, 107, 150, 0.12);
             transform: translateY(-1px);
-        }
-
-        .field-row input:hover {
-            border-color: rgba(42, 107, 150, 0.3);
         }
 
         .row-duo {
@@ -210,7 +181,6 @@
             flex: 1;
         }
 
-        /* Button */
         .action-btn {
             background: linear-gradient(135deg, #1e4a6b 0%, #2a6b96 100%);
             border: none;
@@ -228,24 +198,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.5s ease-out 0.3s both;
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .action-btn:hover::before {
-            left: 100%;
         }
 
         .action-btn:active {
@@ -253,12 +205,6 @@
             box-shadow: 0 4px 12px rgba(42, 107, 150, 0.25);
         }
 
-        .action-btn:active::before {
-            left: 100%;
-            transition: left 0.3s ease;
-        }
-
-        /* Feedback */
         .feedback {
             text-align: center;
             color: #1e7a4a;
@@ -280,15 +226,12 @@
             color: #c0392b;
         }
 
-        /* Results */
         .results-area {
             background: linear-gradient(135deg, #e8f2f9 0%, #dce8f2 100%);
             border-radius: 28px;
             padding: 20px 18px;
             margin: 16px 0 20px 0;
             border: 1px solid rgba(42, 107, 150, 0.12);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            animation: slideUp 0.5s ease-out 0.35s both;
         }
 
         .result-item {
@@ -298,7 +241,6 @@
             border-bottom: 1px dashed rgba(42, 107, 150, 0.15);
             font-size: 0.95rem;
             color: #002d47;
-            transition: all 0.2s ease;
         }
 
         .result-item:last-child {
@@ -323,14 +265,12 @@
             color: #1e7a4a;
         }
 
-        /* History */
         .history-area {
             background: linear-gradient(135deg, #eef4f9 0%, #e3eaf2 100%);
             border-radius: 28px;
             padding: 14px 16px 10px 16px;
             margin: 18px 0 8px 0;
             border: 1px solid rgba(42, 107, 150, 0.1);
-            animation: slideUp 0.5s ease-out 0.4s both;
         }
 
         .history-header {
@@ -399,17 +339,6 @@
             color: #003153;
             font-weight: 500;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-            transition: all 0.2s ease;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        .history-item:hover {
-            transform: translateX(4px);
-        }
-
-        .history-item .h-diff {
-            font-weight: 700;
-            color: #2a6b96;
         }
 
         .empty-history {
@@ -429,68 +358,35 @@
             letter-spacing: 0.3px;
         }
 
-        /* Responsive */
         @media (max-width: 460px) {
             .app-card {
                 padding: 20px 16px 24px;
                 border-radius: 32px;
             }
-
             .header h1 {
                 font-size: 1.6rem;
             }
-
-            .fixed-item {
-                font-size: 0.7rem;
-            }
-
-            .fixed-item span:last-child {
-                font-size: 0.9rem;
-                padding: 2px 10px;
-            }
-
             .row-duo {
                 flex-direction: column;
                 gap: 0;
             }
-
             .result-item {
                 font-size: 0.85rem;
-                padding: 8px 0;
             }
-
-            .result-item .value {
-                font-size: 0.95rem;
-                padding: 0 10px;
-            }
-
             .action-btn {
                 font-size: 1rem;
                 padding: 16px 16px;
-            }
-
-            .field-row input {
-                padding: 12px 16px;
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (min-width: 600px) {
-            .app-card {
-                padding: 32px 28px 36px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-card" id="app">
-        <!-- Header -->
+    <div class="app-card">
         <div class="header">
             <h1>✨ Cotação Perfumes</h1>
             <span class="subhead">preço de venda ideal</span>
         </div>
 
-        <!-- Fixed Values -->
         <div class="fixed-values">
             <div class="fixed-item">
                 <span>Fornecedor</span>
@@ -506,14 +402,13 @@
             </div>
         </div>
 
-        <!-- Fields -->
         <div class="field-group">
             <div class="field-row">
                 <label>
                     Preço no atacado
                     <small>reposição</small>
                 </label>
-                <input type="number" id="atacadoInput" value="0" step="0.01" min="0" inputmode="decimal" placeholder="0,00">
+                <input type="number" id="atacadoInput" value="0" step="0.01" min="0" inputmode="decimal">
             </div>
             <div class="row-duo">
                 <div class="field-row">
@@ -537,14 +432,11 @@
             </div>
         </div>
 
-        <!-- Button -->
         <button class="action-btn" id="calcularBtn">📊 Calcular e comparar</button>
 
-        <!-- Feedback -->
         <div class="feedback" id="feedback">✓ Cálculo realizado com sucesso!</div>
 
-        <!-- Results -->
-        <div class="results-area" id="resultsArea">
+        <div class="results-area">
             <div class="result-item">
                 <span class="label">💎 Lucro mínimo</span>
                 <span class="value" id="resMin">R$ 140,00</span>
@@ -563,7 +455,6 @@
             </div>
         </div>
 
-        <!-- History -->
         <div class="history-area">
             <div class="history-header">
                 <h3>📋 Histórico</h3>
@@ -581,7 +472,6 @@
         (function() {
             'use strict';
 
-            // DOM Elements
             const atacadoInput = document.getElementById('atacadoInput');
             const lucroMinInput = document.getElementById('lucroMinInput');
             const lucroMaxInput = document.getElementById('lucroMaxInput');
@@ -597,15 +487,9 @@
             const baseDisplay = document.getElementById('baseDisplay');
             const feedback = document.getElementById('feedback');
 
-            // Constants
-            const CUSTO_FORNECEDOR = 50;
-            const FRETE = 20;
-            const BASE = CUSTO_FORNECEDOR + FRETE;
-
-            // Update base display
+            const BASE = 70;
             baseDisplay.textContent = `R$ ${BASE.toFixed(2)}`;
 
-            // History
             let historyData = [];
 
             function loadHistory() {
@@ -626,9 +510,7 @@
             function saveHistory() {
                 try {
                     localStorage.setItem('perfumeHistoryMOOD', JSON.stringify(historyData));
-                } catch (e) {
-                    console.warn('Erro ao salvar histórico:', e);
-                }
+                } catch (e) {}
             }
 
             function renderHistory() {
@@ -660,7 +542,6 @@
                 }, 2500);
             }
 
-            // Main calculation
             function calcular() {
                 try {
                     const atacado = parseFloat(atacadoInput.value) || 0;
@@ -669,12 +550,8 @@
                     const desc1 = parseFloat(desc1Input.value) || 0;
                     const desc2 = parseFloat(desc2Input.value) || 0;
 
-                    if (atacado < 0) {
-                        showFeedback('⚠️ Preço no atacado não pode ser negativo', true);
-                        return;
-                    }
-                    if (lucroMin < 0 || lucroMax < 0) {
-                        showFeedback('⚠️ Os lucros não podem ser negativos', true);
+                    if (atacado < 0 || lucroMin < 0 || lucroMax < 0) {
+                        showFeedback('⚠️ Valores não podem ser negativos', true);
                         return;
                     }
                     if (lucroMin > lucroMax) {
@@ -682,7 +559,7 @@
                         return;
                     }
                     if (desc1 < 0 || desc1 > 100 || desc2 < 0 || desc2 > 100) {
-                        showFeedback('⚠️ Descontos devem estar entre 0% e 100%', true);
+                        showFeedback('⚠️ Descontos entre 0% e 100%', true);
                         return;
                     }
 
@@ -691,76 +568,48 @@
                     const precoDesc1 = precoMax * (1 - desc1 / 100);
                     const precoDesc2 = precoMax * (1 - desc2 / 100);
 
-                    // Animate results update
-                    const results = [
-                        { element: resMin, value: precoMin },
-                        { element: resMax, value: precoMax },
-                        { element: resDesc1, value: precoDesc1 },
-                        { element: resDesc2, value: precoDesc2 }
-                    ];
+                    resMin.textContent = `R$ ${precoMin.toFixed(2)}`;
+                    resMax.textContent = `R$ ${precoMax.toFixed(2)}`;
+                    resDesc1.textContent = `R$ ${precoDesc1.toFixed(2)}`;
+                    resDesc2.textContent = `R$ ${precoDesc2.toFixed(2)}`;
 
-                    results.forEach(({ element, value }) => {
-                        element.style.transition = 'all 0.3s ease';
-                        element.style.transform = 'scale(1.1)';
-                        element.textContent = `R$ ${value.toFixed(2)}`;
-                        setTimeout(() => {
-                            element.style.transform = 'scale(1)';
-                        }, 200);
-                    });
-
-                    // Save history
-                    const entry = {
-                        atacado: atacado,
-                        lucroMin: lucroMin,
-                        lucroMax: lucroMax,
-                        desc1: desc1,
-                        desc2: desc2,
-                        precoMin: precoMin,
-                        precoMax: precoMax,
-                        precoDesc1: precoDesc1,
-                        precoDesc2: precoDesc2,
+                    historyData.push({
+                        atacado,
+                        lucroMin,
+                        lucroMax,
+                        desc1,
+                        desc2,
+                        precoMin,
+                        precoMax,
+                        precoDesc1,
+                        precoDesc2,
                         timestamp: Date.now()
-                    };
-                    historyData.push(entry);
+                    });
                     saveHistory();
                     renderHistory();
-
                     showFeedback('✅ Cálculo realizado com sucesso!');
                 } catch (error) {
-                    console.error('Erro no cálculo:', error);
-                    showFeedback('⚠️ Erro ao calcular. Verifique os valores.', true);
+                    showFeedback('⚠️ Erro ao calcular', true);
                 }
             }
 
-            // Clear history
             function clearHistory() {
                 if (historyData.length === 0) {
-                    showFeedback('ℹ️ Histórico já está vazio');
+                    showFeedback('ℹ️ Histórico vazio');
                     return;
                 }
-                if (confirm('Tem certeza que deseja limpar todo o histórico?')) {
+                if (confirm('Limpar todo o histórico?')) {
                     historyData = [];
                     saveHistory();
                     renderHistory();
-                    showFeedback('✅ Histórico limpo com sucesso!');
+                    showFeedback('✅ Histórico limpo!');
                 }
             }
 
-            // Event handlers
-            function handleCalculate(e) {
-                if (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                calcular();
-                return false;
-            }
-
-            // Button events
-            calcularBtn.addEventListener('click', handleCalculate);
+            calcularBtn.addEventListener('click', calcular);
             calcularBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
-                handleCalculate(e);
+                calcular();
             }, { passive: false });
 
             clearHistoryBtn.addEventListener('click', clearHistory);
@@ -769,7 +618,6 @@
                 clearHistory();
             }, { passive: false });
 
-            // Enter key on inputs
             const inputs = [atacadoInput, lucroMinInput, lucroMaxInput, desc1Input, desc2Input];
             inputs.forEach(input => {
                 input.addEventListener('keypress', function(e) {
@@ -781,16 +629,9 @@
                         }
                     }
                 });
-                input.addEventListener('blur', function() {
-                    if (this.value === '' || this.value === '-') {
-                        this.value = '0';
-                    }
-                });
             });
 
-            // Initialize
             loadHistory();
-
             if (historyData.length > 0) {
                 const last = historyData[historyData.length - 1];
                 atacadoInput.value = last.atacado || 0;
@@ -798,7 +639,6 @@
                 lucroMaxInput.value = last.lucroMax || 150;
                 desc1Input.value = last.desc1 || 5;
                 desc2Input.value = last.desc2 || 10;
-
                 resMin.textContent = `R$ ${(last.precoMin || 140).toFixed(2)}`;
                 resMax.textContent = `R$ ${(last.precoMax || 220).toFixed(2)}`;
                 resDesc1.textContent = `R$ ${(last.precoDesc1 || 209).toFixed(2)}`;
@@ -806,7 +646,6 @@
             } else {
                 calcular();
             }
-
         })();
     </script>
 </body>

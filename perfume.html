@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Cotação Perfumes MOOD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f44 100%);
+            padding: 16px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .app-card {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 36px;
+            padding: 24px 20px 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #0b2b44;
+            text-align: center;
+            margin-bottom: 6px;
+            border-bottom: 2px solid #9bbad0;
+            padding-bottom: 12px;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #2c4c66;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            background: #d9e6f0;
+            padding: 6px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .fixed-values {
+            background: #eef4f9;
+            border-radius: 24px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #c2d6e3;
+        }
+
+        .fixed-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+            color: #1f3a4e;
+            font-weight: 500;
+        }
+
+        .fixed-item span:last-child {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #003153;
+            background: white;
+            padding: 0 10px;
+            border-radius: 20px;
+            margin-top: 2px;
+            border: 1px solid #b0c9db;
+            text-align: center;
+        }
+
+        .field-group {
+            background: #f2f8fd;
+            border-radius: 24px;
+            padding: 16px 16px 8px 16px;
+            margin-bottom: 18px;
+            border: 1px solid #c6dae9;
+        }
+
+        .field-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 14px;
+        }
+
+        .field-row label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a374d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .field-row label small {
+            font-weight: 400;
+            color: #3c5f79;
+            font-size: 0.75rem;
+            background: #dce8f0;
+            padding: 0 10px;
+            border-radius: 30px;
+        }
+
+        .field-row input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #b8cedf;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: white;
+            color: #00243d;
+            font-weight: 500;
+            transition: 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .field-row input:focus {
+            border-color: #2a6b96;
+            box-shadow: 0 0 0 3px rgba(42, 107, 150, 0.2);
+        }
+
+        .row-duo {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row-duo .field-row {
+            flex: 1;
+        }
+
+        .action-btn {
+            background: #1e4a6b;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 16px 10px;
+            border-radius: 60px;
+            width: 100%;
+            margin: 12px 0 20px 0;
+            box-shadow: 0 6px 0 #0a283b;
+            transition: 0.08s linear;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            border: 1px solid #3f7b9e;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            position: relative;
+        }
+
+        .action-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0a283b;
+        }
+
+        .action-btn:focus-visible {
+            outline: 2px solid #6a9fc7;
+            outline-offset: 2px;
+        }
+
+        .action-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 60px;
+            background: transparent;
+            transition: background 0.2s;
+        }
+
+        .action-btn:active::after {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .results-area {
+            background: #e3eef7;
+            border-radius: 28px;
+            padding: 20px 16px;
+            margin: 16px 0 18px;
+            border: 1px solid #b7d0e1;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #aec6d8;
+            font-size: 0.95rem;
+            color: #002d47;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item .label {
+            font-weight: 500;
+        }
+
+        .result-item .value {
+            font-weight: 700;
+            color: #003f62;
+        }
+
+        .history-area {
+            background: #eaf2f9;
+            border-radius: 24px;
+            padding: 10px 14px 6px 14px;
+            margin: 18px 0 8px;
+            border: 1px solid #b9d0e2;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .history-header h3 {
+            font-size: 0.95rem;
+            color: #12405e;
+            font-weight: 600;
+        }
+
+        .clear-btn {
+            background: #5b7e97;
+            border: none;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border: 1px solid #7f9fb6;
+            transition: 0.1s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .clear-btn:active {
+            opacity: 0.7;
+            transform: scale(0.96);
+        }
+
+        .history-list {
+            max-height: 140px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            padding-right: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 40px;
+            padding: 6px 14px;
+            margin-bottom: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border-left: 4px solid #2d6b91;
+            color: #003153;
+            font-weight: 500;
+        }
+
+        .history-item .h-diff {
+            font-weight: 700;
+        }
+
+        .empty-history {
+            color: #3b617c;
+            font-style: italic;
+            padding: 6px 0;
+            text-align: center;
+        }
+
+        .footnote {
+            font-size: 0.7rem;
+            color: #416d8b;
+            text-align: center;
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+
+        .feedback {
+            text-align: center;
+            color: #1e6b3c;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: -8px 0 12px 0;
+            min-height: 24px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feedback.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 460px) {
+            .app-card {
+                padding: 18px 14px;
+            }
+            .fixed-item {
+                font-size: 0.75rem;
+            }
+            .row-duo {
+                flex-direction: column;
+                gap: 0;
+            }
+            .result-item {
+                font-size: 0.85rem;
+            }
+            .action-btn {
+                font-size: 1.1rem;
+                padding: 18px 10px;
+            }
+        }
+
+        @media (hover: none) {
+            .action-btn:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-card" id="app">
+        <h1>Cotação Perfumes MOOD</h1>
+        <div style="text-align: center;"><span class="subhead">preço de venda ideal</span></div>
+
+        <!-- Valores fixos -->
+        <div class="fixed-values">
+            <div class="fixed-item"><span>Fornecedor</span><span>R$ 50,00</span></div>
+            <div class="fixed-item"><span>Frete / peça</span><span>R$ 20,00</span></div>
+            <div class="fixed-item"><span>Base (custo+frete)</span><span id="baseDisplay">R$ 70,00</span></div>
+        </div>
+
+        <!-- Campos editáveis -->
+        <div class="field-group">
+            <div class="field-row">
+                <label>Preço no atacado <small>(reposição)</small></label>
+                <input type="number" id="atacadoInput" value="0" step="0.01" min="0" inputmode="decimal">
+            </div>
+            <div class="row-duo">
+                <div class="field-row">
+                    <label>Lucro mínimo</label>
+                    <input type="number" id="lucroMinInput" value="70" step="1" min="0" inputmode="numeric">
+                </div>
+                <div class="field-row">
+                    <label>Lucro máximo</label>
+                    <input type="number" id="lucroMaxInput" value="150" step="1" min="0" inputmode="numeric">
+                </div>
+            </div>
+            <div class="row-duo">
+                <div class="field-row">
+                    <label>Desconto 1 (%)</label>
+                    <input type="number" id="desc1Input" value="5" step="0.5" min="0" max="100" inputmode="decimal">
+                </div>
+                <div class="field-row">
+                    <label>Desconto 2 (%)</label>
+                    <input type="number" id="desc2Input" value="10" step="0.5" min="0" max="100" inputmode="decimal">
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão calcular -->
+        <button class="action-btn" id="calcularBtn">Calcular e comparar</button>
+
+        <!-- Feedback -->
+        <div class="feedback" id="feedback">✓ Cálculo realizado com sucesso!</div>
+
+        <!-- Resultados -->
+        <div class="results-area" id="resultsArea">
+            <div class="result-item"><span class="label">Preço com lucro mínimo</span><span class="value" id="resMin">R$ 140,00</span></div>
+            <div class="result-item"><span class="label">Preço com lucro máximo</span><span class="value" id="resMax">R$ 220,00</span></div>
+            <div class="result-item"><span class="label">Desconto 1 (5%)</span><span class="value" id="resDesc1">R$ 209,00</span></div>
+            <div class="result-item"><span class="label">Desconto 2 (10%)</span><span class="value" id="resDesc2">R$ 198,00</span></div>
+        </div>
+
+        <!-- Histórico -->
+        <div class="history-area">
+            <div class="history-header">
+                <h3>📋 Histórico</h3>
+                <button class="clear-btn" id="clearHistoryBtn">Limpar histórico</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">Nenhum cálculo salvo</div>
+            </div>
+        </div>
+        <div class="footnote">* Descontos sobre o preço com lucro máximo</div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // Elementos DOM
+            const atacadoInput = document.getElementById('atacadoInput');
+            const lucroMinInput = document.getElementById('lucroMinInput');
+            const lucroMaxInput = document.getElementById('lucroMaxInput');
+            const desc1Input = document.getElementById('desc1Input');
+            const desc2Input = document.getElementById('desc2Input');
+            const calcularBtn = document.getElementById('calcularBtn');
+            const resMin = document.getElementById('resMin');
+            const resMax = document.getElementById('resMax');
+            const resDesc1 = document.getElementById('resDesc1');
+            const resDesc2 = document.getElementById('resDesc2');
+            const historyList = document.getElementById('historyList');
+            const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+            const baseDisplay = document.getElementById('baseDisplay');
+            const feedback = document.getElementById('feedback');
+
+            // Constantes
+            const CUSTO_FORNECEDOR = 50;
+            const FRETE = 20;
+            const BASE = CUSTO_FORNECEDOR + FRETE;
+
+            // Atualiza display base
+            baseDisplay.textContent = `R$ ${BASE.toFixed(2)}`;
+
+            // Histórico
+            let historyData = [];
+
+            function loadHistory() {
+                try {
+                    const stored = localStorage.getItem('perfumeHistoryMOOD');
+                    if (stored) {
+                        historyData = JSON.parse(stored);
+                        if (!Array.isArray(historyData)) historyData = [];
+                    } else {
+                        historyData = [];
+                    }
+                } catch {
+                    historyData = [];
+                }
+                renderHistory();
+            }
+
+            function saveHistory() {
+                try {
+                    localStorage.setItem('perfumeHistoryMOOD', JSON.stringify(historyData));
+                } catch (e) {
+                    console.warn('Erro ao salvar histórico:', e);
+                }
+            }
+
+            function renderHistory() {
+                if (!historyList) return;
+                if (historyData.length === 0) {
+                    historyList.innerHTML = `<div class="empty-history">Nenhum cálculo salvo</div>`;
+                    return;
+                }
+                let html = '';
+                const display = [...historyData].reverse().slice(0, 10);
+                for (const item of display) {
+                    html += `<div class="history-item">
+                        <span>Atacado: R$ ${item.atacado.toFixed(2)} | Lucro: ${item.lucroMin}-${item.lucroMax}</span>
+                        <span class="h-diff">Desc: ${item.desc1}% / ${item.desc2}%</span>
+                    </div>`;
+                }
+                historyList.innerHTML = html;
+            }
+
+            function showFeedback(message) {
+                feedback.textContent = message;
+                feedback.classList.add('show');
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            }
+
+            // Função de cálculo principal
+            function calcular() {
+                try {
+                    // Ler valores atuais
+                    const atacado = parseFloat(atacadoInput.value) || 0;
+                    const lucroMin = parseFloat(lucroMinInput.value) || 0;
+                    const lucroMax = parseFloat(lucroMaxInput.value) || 0;
+                    const desc1 = parseFloat(desc1Input.value) || 0;
+                    const desc2 = parseFloat(desc2Input.value) || 0;
+
+                    // Validações
+                    if (atacado < 0) {
+                        showFeedback('⚠️ Preço no atacado não pode ser negativo');
+                        return;
+                    }
+                    if (lucroMin < 0 || lucroMax < 0) {
+                        showFeedback('⚠️ Os lucros não podem ser negativos');
+                        return;
+                    }
+                    if (desc1 < 0 || desc1 > 100 || desc2 < 0 || desc2 > 100) {
+                        showFeedback('⚠️ Descontos devem estar entre 0% e 100%');
+                        return;
+                    }
+
+                    // Cálculo: Base + Atacado + Lucro
+                    const precoMin = BASE + atacado + lucroMin;
+                    const precoMax = BASE + atacado + lucroMax;
+
+                    // Descontos sobre o preço com lucro máximo
+                    const precoDesc1 = precoMax * (1 - desc1 / 100);
+                    const precoDesc2 = precoMax * (1 - desc2 / 100);
+
+                    // Atualizar resultados
+                    resMin.textContent = `R$ ${precoMin.toFixed(2)}`;
+                    resMax.textContent = `R$ ${precoMax.toFixed(2)}`;
+                    resDesc1.textContent = `R$ ${precoDesc1.toFixed(2)}`;
+                    resDesc2.textContent = `R$ ${precoDesc2.toFixed(2)}`;
+
+                    // Salvar histórico
+                    const entry = {
+                        atacado: atacado,
+                        lucroMin: lucroMin,
+                        lucroMax: lucroMax,
+                        desc1: desc1,
+                        desc2: desc2,
+                        precoMin: precoMin,
+                        precoMax: precoMax,
+                        precoDesc1: precoDesc1,
+                        precoDesc2: precoDesc2,
+                        timestamp: Date.now()
+                    };
+                    historyData.push(entry);
+                    saveHistory();
+                    renderHistory();
+
+                    showFeedback('✓ Cálculo realizado com sucesso!');
+                } catch (error) {
+                    console.error('Erro no cálculo:', error);
+                    showFeedback('⚠️ Erro ao calcular. Verifique os valores.');
+                }
+            }
+
+            // Limpar histórico
+            function clearHistory() {
+                if (historyData.length === 0) {
+                    showFeedback('ℹ️ Histórico já está vazio');
+                    return;
+                }
+                if (confirm('Tem certeza que deseja limpar todo o histórico?')) {
+                    historyData = [];
+                    saveHistory();
+                    renderHistory();
+                    showFeedback('✓ Histórico limpo com sucesso!');
+                }
+            }
+
+            // Handler para o botão calcular
+            function handleCalculate(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                calcular();
+                return false;
+            }
+
+            // Event listeners - suporte para mobile e desktop
+            calcularBtn.addEventListener('click', handleCalculate);
+            calcularBtn.addEventListener('touchstart', function(e) {
+                // Previne comportamento padrão em dispositivos móveis
+                e.preventDefault();
+                handleCalculate(e);
+            }, { passive: false });
+
+            clearHistoryBtn.addEventListener('click', clearHistory);
+            clearHistoryBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                clearHistory();
+            }, { passive: false });
+
+            // Tecla Enter nos campos
+            const inputs = [atacadoInput, lucroMinInput, lucroMaxInput, desc1Input, desc2Input];
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        calcular();
+                        // Fechar teclado em dispositivos móveis
+                        if (document.activeElement) {
+                            document.activeElement.blur();
+                        }
+                    }
+                });
+                input.addEventListener('blur', function() {
+                    if (this.value === '' || this.value === '-') {
+                        this.value = '0';
+                    }
+                });
+            });
+
+            // Inicializar
+            loadHistory();
+
+            // Restaurar último cálculo ou fazer inicial
+            if (historyData.length > 0) {
+                const last = historyData[historyData.length - 1];
+                atacadoInput.value = last.atacado || 0;
+                lucroMinInput.value = last.lucroMin || 70;
+                lucroMaxInput.value = last.lucroMax || 150;
+                desc1Input.value = last.desc1 || 5;
+                desc2Input.value = last.desc2 || 10;
+
+                resMin.textContent = `R$ ${(last.precoMin || 140).toFixed(2)}`;
+                resMax.textContent = `R$ ${(last.precoMax || 220).toFixed(2)}`;
+                resDesc1.textContent = `R$ ${(last.precoDesc1 || 209).toFixed(2)}`;
+                resDesc2.textContent = `R$ ${(last.precoDesc2 || 198).toFixed(2)}`;
+            } else {
+                calcular();
+            }
+
+            // Forçar atualização ao perder o foco dos campos (útil em mobile)
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value === '' || this.value === '-') {
+                        this.value = '0';
+                    }
+                });
+            });
+
+        })();
+    </script>
+</body>
+</html>
